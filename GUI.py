@@ -2,18 +2,19 @@ import os  # 引入 os 模組
 import tkinter as tk  # 引入 tkinter 模組
 
 
-Path_Golden_ERP = ""
-Path_Star_ERP = ""
+#Path_Golden_ERP = ""
+#Path_Star_ERP = ""
 
 
 def Start_ERP():
-    os.system("start"+Path_Golden_ERP)  # 執行ERP
+    os.system("start C:\Datawin\GoldenTop\EXE\erp2014.exe")  # 執行ERP
 
 
 def Start_ERPII():
-    os.system("start"+Path_Star_ERP)  # 執行ERP
+    os.system("start C:\STARERP\RemoteClient\starerp1t.exe")  # 執行ERP
 
 
+'''
 def createNewWindow():
     Path_setting = tk.Toplevel(window)
     Path_setting.title('設定ERP路徑')
@@ -40,18 +41,18 @@ def createNewWindow():
     Path_setting_Confirm.config(text="確認",
                                 command=Path_setting.destroy)
     Path_setting_Confirm.grid(column=0, row=3)
-
+'''
 
 # 建立主視窗 Frame
 window = tk.Tk()
-
+'''
 menubar = tk.Menu(window)              # 建立主選單
 menubar.add_command(label="設定路徑", command=createNewWindow)    # 主選單項目&事件
-
+'''
 # 設定視窗標題
 window.title('ERP選單')
-window.configure(menu=menubar,
-                 background='#9D9D9D')   # 設定背景色黑色
+window.configure(  # menu=menubar,
+    background='#9D9D9D')   # 設定背景色黑色
 screen_width = window.winfo_screenwidth()    # 取得螢幕寬度
 screen_height = window.winfo_screenheight()  # 取得螢幕高度
 
