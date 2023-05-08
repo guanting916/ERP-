@@ -6,11 +6,11 @@ import tkinter as tk  # 引入 tkinter 模組
 #Path_Star_ERP = ""
 
 
-def Start_ERP():
-    os.system("start C:\Datawin\GoldenTop\EXE\erp2014.exe")  # 執行ERP
+def Golden_ERP():
+    os.system("start C:\Datawin\GoldenTop\EXE\erp2014.exe")  # 執行Start_ERP
 
 
-def Start_ERPII():
+def Star_ERP():
     os.system("start C:\STARERP\RemoteClient\starerp1t.exe")  # 執行ERP
 
 
@@ -35,7 +35,7 @@ def createNewWindow():
     Path_in_Golden_ERP.config(width=30)  # 放入單行輸入框
     Path_in_Golden_ERP.grid(column=1, row=0)
     Path_in_Star_ERP = tk.Entry(Path_setting)
-    Path_in_Star_ERP.config(width=30)  # 放入單行輸入框
+    Path_in_Star_ERP.config(width=30)  # 放入單行輸入框DF
     Path_in_Star_ERP.grid(column=1, row=1)
     Path_setting_Confirm = tk.Button(Path_setting)
     Path_setting_Confirm.config(text="確認",
@@ -72,7 +72,7 @@ button_ERP.config(
     text='Golden ERP',  # 顯示文字
     width=button_width,  # 設定按鈕寬度
     height=button_height,  # 設定按鈕高度
-    command=Start_ERP)  # 按下按鈕所執行的函數
+    command=Golden_ERP)  # 按下按鈕所執行的函數
 
 button_ERP.place(relx=0.34,  # 設定按鈕x位置
                  rely=0.2)  # 設定按鈕y位置
@@ -83,7 +83,7 @@ button_ERPII.config(
     text='Star ERP',  # 顯示文字
     width=button_width,  # 設定按鈕寬度
     height=button_height,  # 設定按鈕高度
-    command=Start_ERPII)  # 按下按鈕所執行的函數
+    command=Star_ERP)  # 按下按鈕所執行的函數
 
 button_ERPII.place(relx=0.34,  # 設定按鈕x位置
                    rely=0.55)  # 設定按鈕y位置
