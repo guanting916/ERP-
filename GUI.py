@@ -1,7 +1,6 @@
 import os  # 引入 os 模組
 import tkinter as tk  # 引入 tkinter 模組
 
-
 #Path_Golden_ERP = ""
 #Path_Star_ERP = ""
 
@@ -43,43 +42,42 @@ def createNewWindow():
     Path_setting_Confirm.grid(column=0, row=3)
 '''
 
-
-window = tk.Tk() # 建立主視窗
+window = tk.Tk()  # 建立主視窗
 '''
 menubar = tk.Menu(window)              # 建立主選單
 menubar.add_command(label="設定路徑", command=createNewWindow)    # 主選單項目&事件
 '''
-
-window.title('ERP選單') # 設定視窗標題
+window.title('ERP選單')  # 設定視窗標題
 window.configure(  # menu=menubar,
-    background='#9D9D9D')   # 設定背景色黑色
+    background='#9D9D9D')   # 設定背景色灰色
 screen_width = window.winfo_screenwidth()    # 取得螢幕寬度 (pixels)
 screen_height = window.winfo_screenheight()  # 取得螢幕高度 (pixels)
 
-window_width = 720  # 視窗寬度 (pixels)
-window_height = 480  # 視窗高度 (pixels)
-window.resizable(False, False)
+window_width = 540  # 視窗寬度 (pixels)
+window_height = 340  # 視窗高度 (pixels)
+window.resizable(False, False)  # 禁止變更大小
 left = int((screen_width - window_width)/2)       # 計算左上 x 座標
 top = int((screen_height - window_height)/2)      # 計算左上 y 座標
 window.geometry(f'{window_width}x{window_height}+{left}+{top}')  # 設定視窗大小、位置
 
-button_width = 20  # 按鈕寬度
-button_height = 5  # 按鈕高度
 button_ERP = tk.Button(window)  # 建立按鈕所在視窗
 button_ERP.config(
-    font=10,  # 文字大小
+    font=("Arial", 14, "bold"),  # 文字大小
     text='Golden ERP',  # 顯示文字
-    width=button_width,  # 設定按鈕寬度
-    height=button_height,  # 設定按鈕高度
+    width=15,
+    pady=30,
     command=Golden_ERP)  # 按下按鈕所執行的函數
-button_ERP.pack(anchor="center",side="top",pady=80)
+
+button_ERP.pack(side="top", pady=50)  # 設定按鈕位置
+
 button_ERPII = tk.Button(window)  # 按鈕所在視窗
 button_ERPII.config(
-    font=10,  # 文字大小
+    font=("Arial", 14, "bold"),  # 文字大小
     text='Star ERP',  # 顯示文字
-    width=button_width,  # 設定按鈕寬度
-    height=button_height,  # 設定按鈕高度
+    anchor="center",
+    width=15,
+    pady=30,
     command=Star_ERP)  # 按下按鈕所執行的函數
-button_ERPII.pack(anchor="center",side="top")
+button_ERPII.pack(side="top")  # 設定按鈕位置F
 
-window.mainloop()# 執行主程式
+window.mainloop()  # 執行主程式
