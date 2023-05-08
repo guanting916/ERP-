@@ -43,14 +43,14 @@ def createNewWindow():
     Path_setting_Confirm.grid(column=0, row=3)
 '''
 
-# 建立主視窗 Frame
-window = tk.Tk()
+
+window = tk.Tk() # 建立主視窗
 '''
 menubar = tk.Menu(window)              # 建立主選單
 menubar.add_command(label="設定路徑", command=createNewWindow)    # 主選單項目&事件
 '''
-# 設定視窗標題
-window.title('ERP選單')
+
+window.title('ERP選單') # 設定視窗標題
 window.configure(  # menu=menubar,
     background='#9D9D9D')   # 設定背景色黑色
 screen_width = window.winfo_screenwidth()    # 取得螢幕寬度
@@ -65,6 +65,8 @@ window.geometry(f'{window_width}x{window_height}+{left}+{top}')  # 設定視窗�
 
 button_width = 20  # 按鈕寬度
 button_height = 5  # 按鈕高度
+print(window.winfo_reqwidth())
+button_x_place = int((window.winfo_reqwidth()-button_width)/2)
 # 建立按鈕
 button_ERP = tk.Button(window)  # 按鈕所在視窗
 button_ERP.config(
@@ -74,7 +76,7 @@ button_ERP.config(
     height=button_height,  # 設定按鈕高度
     command=Golden_ERP)  # 按下按鈕所執行的函數
 
-button_ERP.place(relx=0.34,  # 設定按鈕x位置
+button_ERP.place(x=button_x_place,  # 設定按鈕x位置
                  rely=0.2)  # 設定按鈕y位置
 
 button_ERPII = tk.Button(window)  # 按鈕所在視窗
@@ -85,7 +87,7 @@ button_ERPII.config(
     height=button_height,  # 設定按鈕高度
     command=Star_ERP)  # 按下按鈕所執行的函數
 
-button_ERPII.place(relx=0.34,  # 設定按鈕x位置
+button_ERPII.place(x=button_x_place,  # 設定按鈕x位置
                    rely=0.55)  # 設定按鈕y位置
 
 # 執行主程式
