@@ -1,20 +1,25 @@
 import os  # 引入 os 模組
 import tkinter as tk  # 引入 tkinter 模組
-
-#Path_Golden_ERP = ""
-#Path_Star_ERP = ""
-
+import pickle
 
 def Golden_ERP():
-    os.system("start C:\Datawin\GoldenTop\EXE\erp2014.exe")  # 執行Start_ERP
-
+    global Path_Golden_ERP
+    #os.system("start C:\Datawin\GoldenTop\EXE\erp2014.exe")  # 執行Start_ERP
+    with open('setting.pickle', 'rb') as f:
+        setting = pickle.load(f)
+    Path_Golden_ERP = setting["golden_path"]
+    os.system("start"+Path_Golden_ERP)  # 執行Start_ERP
 
 def Star_ERP():
-    os.system("start C:\STARERP\RemoteClient\starerp1t.exe")  # 執行ERP
+    global Path_Star_ERP
+    #os.system("start C:\STARERP\RemoteClient\starerp1t.exe")  # 執行ERP
+    with open('setting.pickle', 'rb') as f:
+        setting = pickle.load(f)
+    Path_Star_ERP = setting["star_path"]
+    os.system("start"+Path_Star_ERP)  # 執行ERP
 
-
-'''
 def createNewWindow():
+    global Path_setting
     Path_setting = tk.Toplevel(window)
     Path_setting.title('設定ERP路徑')
     window_width = 450  # 視窗寬度
@@ -30,25 +35,40 @@ def createNewWindow():
     Path_setting_Star_ERP = tk.Label(Path_setting)
     Path_setting_Star_ERP.config(text='Star ERP路徑：')
     Path_setting_Star_ERP.grid(column=0, row=1)
+    global Path_in_Golden_ERP
     Path_in_Golden_ERP = tk.Entry(Path_setting)
     Path_in_Golden_ERP.config(width=30)  # 放入單行輸入框
     Path_in_Golden_ERP.grid(column=1, row=0)
+    global Path_in_Star_ERP
     Path_in_Star_ERP = tk.Entry(Path_setting)
-    Path_in_Star_ERP.config(width=30)  # 放入單行輸入框DF
+    Path_in_Star_ERP.config(width=30)  # 放入單行輸入框
     Path_in_Star_ERP.grid(column=1, row=1)
     Path_setting_Confirm = tk.Button(Path_setting)
     Path_setting_Confirm.config(text="確認",
-                                command=Path_setting.destroy)
+                                command=path_save)
     Path_setting_Confirm.grid(column=0, row=3)
-'''
+    global setting
+    
+def path_save():
+    # 獲取兩個Entry控件中的值
+    golden_path = Path_in_Golden_ERP.get()
+    star_path = Path_in_Star_ERP.get()
+    
+    # 創建一個字典，存儲這兩個值
+    setting = {"golden_path": golden_path, "star_path": star_path}
+    
+    # 使用pickle模組將字典儲存到文件中
+    with open('setting.pickle', 'wb') as f:
+        pickle.dump(setting, f)
+    
+    # 關閉窗口
+    Path_setting.destroy()
 
 window = tk.Tk()  # 建立主視窗
-'''
 menubar = tk.Menu(window)              # 建立主選單
 menubar.add_command(label="設定路徑", command=createNewWindow)    # 主選單項目&事件
-'''
 window.title('ERP選單')  # 設定視窗標題
-window.configure(  # menu=menubar,
+window.configure(menu=menubar,
     background='#9D9D9D')   # 設定背景色灰色
 screen_width = window.winfo_screenwidth()    # 取得螢幕寬度 (pixels)
 screen_height = window.winfo_screenheight()  # 取得螢幕高度 (pixels)
