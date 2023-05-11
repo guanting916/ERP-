@@ -4,26 +4,22 @@ import pickle  # 引入 pickle 模組
 
 
 def Golden_ERP():
-    global Path_Golden_ERP
-    # os.system("start C:\Datawin\GoldenTop\EXE\erp2014.exe")  # 執行Golden_ERP
-    with open('setting.pickle', 'rb') as f:
-        setting = pickle.load(f)
-    Path_Golden_ERP = setting["golden_path"]
+    # os.system("start C:\Datawin\GoldenTop\EXE\erp2014.exe")
     os.system("start "+Path_Golden_ERP)  # 執行Golden_ERP
 
 
 def Star_ERP():
-    global Path_Star_ERP
-    # os.system("start C:\STARERP\RemoteClient\starerp1t.exe")  # 執行Start_ERP
-    with open('setting.pickle', 'rb') as f:
-        setting = pickle.load(f)
-    Path_Star_ERP = setting["star_path"]
+    # os.system("start C:\STARERP\RemoteClient\starerp1t.exe")
     os.system("start "+Path_Star_ERP)  # 執行Start_ERP
 
 
 def createNewWindow():
-    global Path_setting, setting, Path_in_Golden_ERP, Path_in_Star_ERP
-    Path_setting = tk.Toplevel(window)
+    global Path_setting, setting, Path_in_Golden_ERP, Path_in_Star_ERP, Path_Golden_ERP, Path_Star_ERP  # 定義全域變數
+    with open('setting.pickle', 'rb') as f:
+        setting = pickle.load(f)
+    Path_Golden_ERP = setting["golden_path"]  # 建立變數
+    Path_Star_ERP = setting["star_path"]  # 建立變數
+    Path_setting = tk.Toplevel(window)   # 建立子視窗
     Path_setting.title('設定ERP路徑')  # 設定視窗標題
     window_width = 450  # 視窗寬度
     window_height = 75  # 視窗高度
@@ -33,34 +29,36 @@ def createNewWindow():
     Path_setting.geometry(
         f'{window_width}x{window_height}+{left}+{top}')  # 設定視窗大小、位置
 
-    Path_setting_Golden_ERP = tk.Label(Path_setting)
-    Path_setting_Golden_ERP.config(text='Golden ERP路徑：')
-    Path_setting_Golden_ERP.grid(column=0, row=0)
+    Path_setting_Golden_ERP = tk.Label(Path_setting)  # 建立標籤
+    Path_setting_Golden_ERP.config(text='Golden ERP路徑：')  # 設定標籤內容
+    Path_setting_Golden_ERP.grid(column=0, row=0)  # 設定標籤位置
 
-    Path_setting_Star_ERP = tk.Label(Path_setting)
-    Path_setting_Star_ERP.config(text='Star ERP路徑：')
-    Path_setting_Star_ERP.grid(column=0, row=1)
+    Path_setting_Star_ERP = tk.Label(Path_setting)   # 建立標籤
+    Path_setting_Star_ERP.config(text='Star ERP路徑：')  # 設定標籤內容
+    Path_setting_Star_ERP.grid(column=0, row=1)  # 設定標籤位置
 
-    Path_in_Golden_ERP = tk.Entry(Path_setting)
+    Path_in_Golden_ERP = tk.Entry(Path_setting)  # 建立單行輸入框
+    Path_in_Golden_ERP.insert(0, Path_Golden_ERP)  # 設定預設文字
     Path_in_Golden_ERP.config(width=30)  # 放入單行輸入框
-    Path_in_Golden_ERP.grid(column=1, row=0)
+    Path_in_Golden_ERP.grid(column=1, row=0)  # 設定輸入框位置
 
-    Path_in_Star_ERP = tk.Entry(Path_setting)
+    Path_in_Star_ERP = tk.Entry(Path_setting)  # 建立單行輸入框
+    Path_in_Star_ERP.insert(0, Path_Star_ERP)  # 設定預設文字
     Path_in_Star_ERP.config(width=30)  # 放入單行輸入框
-    Path_in_Star_ERP.grid(column=1, row=1)
+    Path_in_Star_ERP.grid(column=1, row=1)  # 設定輸入框位置
 
-    Path_setting_Confirm = tk.Button(Path_setting)
-    Path_setting_Confirm.config(text="確認",
-                                command=path_save)
-    Path_setting_Confirm.grid(column=0, row=3)
+    Path_setting_Confirm = tk.Button(Path_setting)  # 建立按鈕
+    Path_setting_Confirm.config(text="確認",  # # 顯示文字
+                                command=path_save)  # 按下按鈕所執行的函數
+    Path_setting_Confirm.grid(column=0, row=3)  # 設定按鈕位置
 
 
 def path_save():
-    golden_path = Path_in_Golden_ERP.get()
-    star_path = Path_in_Star_ERP.get()  # 獲取兩個Entry控件中的值
+    golden_path = Path_in_Golden_ERP.get()  # 獲取Entry元件中的值
+    star_path = Path_in_Star_ERP.get()  # 獲取Entry元件中的值
 
     setting = {"golden_path": golden_path,
-               "star_path": star_path}  # 創建一個字典，存儲這兩個值
+               "star_path": star_path}  # 建立一個字典，儲存這兩個值
 
     with open('setting.pickle', 'wb') as f:    # 使用pickle模組將字典儲存到文件中
         pickle.dump(setting, f)
